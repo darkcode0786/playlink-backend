@@ -11,7 +11,7 @@ export type UserDocument = HydratedDocument<IUser>;
 
 const userSchema = new Schema<UserDocument>(
     {
-        username: { type: String, required: true, unique: true },
+        username: { type: String, unique: true },
         name: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },

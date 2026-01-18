@@ -16,6 +16,7 @@ export class UserRepository implements IUserRepository {
     }
 
     async existsByUsername(username: string): Promise<boolean> {
-        return (await User.countDocuments({ username })) > 0;
+        return await User.exists({ username }) !== null;
     }
+
 }

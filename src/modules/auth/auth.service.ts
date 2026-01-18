@@ -5,6 +5,7 @@ import { UserDocument } from "../user/user.model";
 import { IUserRepository } from "../user/user.repository.interface";
 
 export class AuthService {
+
   constructor(private userRepo: IUserRepository) { }
 
   async register(name: string, username: string, email: string, password: string) {
@@ -20,21 +21,22 @@ export class AuthService {
       password: hashed,
     });
 
-    return this.generateToken(user.id);
+    return this.generateToken(user);  
   }
 
   async login(username: string, password: string) {
     const user = await this.userRepo.findByUsername(username);
     if (!user) throw new Error("Invalid credentials");
 
-    const match = comparePassword(password, user.password)
+    const match = await comparePassword(password, user.password);
     if (!match) throw new Error("Invalid credentials");
 
-    return this.generateToken(user.id);
-
+    return this.generateToken(user); // same here
   }
 
-  private generateToken(userId: string) {
-    return signToken(this.userRepo)
+  private generateToken(user: UserDocument) {
+    return signToken({ id: user.id, username: user.username, email: user.email });
   }
+
+
 }
