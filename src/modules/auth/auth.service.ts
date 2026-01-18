@@ -38,7 +38,3 @@ export class AuthService {
     return signToken(this.userRepo)
   }
 }
-export function register(body: any) {
-  throw new Error("Function not implemented.");
-}
-

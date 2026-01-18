@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 // 🔥 ROUTES YAHAN PLUG HOTE HAIN
-app.use("/api", routes);
+app.use("/api/v1", routes);
 
 // ❗ last middleware
 // app.use(errorMiddleware);
